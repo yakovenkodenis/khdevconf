@@ -12,6 +12,7 @@
 #  qa_finish     :time
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  timetable_id  :integer
 #
 
 require 'rails_helper'
