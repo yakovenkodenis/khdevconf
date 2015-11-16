@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116071003) do
+ActiveRecord::Schema.define(version: 20151116073222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,9 +36,10 @@ ActiveRecord::Schema.define(version: 20151116071003) do
 
   create_table "contacts", force: :cascade do |t|
     t.string   "contact"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.integer  "contact_type_id"
+    t.integer  "organisers_contact_id"
   end
 
   add_index "contacts", ["contact_type_id"], name: "index_contacts_on_contact_type_id", using: :btree
@@ -141,6 +142,7 @@ ActiveRecord::Schema.define(version: 20151116071003) do
   add_index "users", ["user_type_id"], name: "index_users_on_user_type_id", using: :btree
 
   add_foreign_key "feedbacks", "users"
+  add_foreign_key "organisers_contacts", "contacts"
   add_foreign_key "speeches", "timetables"
   add_foreign_key "sponsorship_plans", "users"
   add_foreign_key "user_types", "users"
