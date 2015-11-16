@@ -11,4 +11,6 @@
 
 class UserType < ActiveRecord::Base
   belongs_to :user
+
+  validates :type, uniqueness: { case_sensitive: false }, presence: true
 end
