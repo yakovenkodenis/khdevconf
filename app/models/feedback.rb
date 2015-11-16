@@ -11,4 +11,6 @@
 
 class Feedback < ActiveRecord::Base
   belongs_to :user
+
+  validates :feedback, :user, presence: true
 end

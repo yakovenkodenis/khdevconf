@@ -14,7 +14,7 @@ require 'rails_helper'
 RSpec.describe Feedback, type: :model do
   describe 'validations' do
     it { should validate_presence_of :feedback }
-    it { should_validate_presence_of :user }
+    it { should validate_presence_of :user }
   end
 
   describe 'associations' do
