@@ -18,4 +18,7 @@ class Speech < ActiveRecord::Base
   belongs_to :speaker, class_name: 'User',
                        foreign_key: 'speaker_id', dependent: :destroy
   belongs_to :timetable
+
+  validates :speaker, :name, :description, :speech_start, :speech_finish,
+            :qa_start, :qa_finish, presence: true
 end
