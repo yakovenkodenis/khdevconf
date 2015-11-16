@@ -17,5 +17,18 @@
 require 'rails_helper'
 
 RSpec.describe Conference, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'validations' do
+    it { should validate_presence_of :name }
+    it { should validate_presence_of :description }
+    it { should validate_presence_of :date }
+    it { should validate_presence_of :place }
+  end
+
+  describe 'associations' do
+    it { should have_many :speakers }
+    it { should have_many :attendees }
+    it { should have_many :sponsors }
+
+    it { should have_one :timetable }
+  end
 end
