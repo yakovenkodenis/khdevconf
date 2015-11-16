@@ -26,7 +26,7 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', require: false
   gem 'letter_opener'
   gem 'email_spec'
   gem 'mailcatcher'
@@ -34,4 +34,8 @@ group :development, :test do
   gem 'byebug'
   gem 'pry'
   gem 'spring'
+end
+
+group :development do
+  gem 'annotate'
 end

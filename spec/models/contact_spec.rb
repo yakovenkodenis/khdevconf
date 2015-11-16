@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: contacts
+#
+#  id              :integer          not null, primary key
+#  contact         :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  contact_type_id :integer
+#
+
 require 'rails_helper'
 
 RSpec.describe Contact, type: :model do

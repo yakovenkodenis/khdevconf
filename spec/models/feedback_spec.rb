@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: feedbacks
+#
+#  id         :integer          not null, primary key
+#  feedback   :text
+#  user_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Feedback, type: :model do
