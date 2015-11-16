@@ -41,7 +41,7 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of :email }
     it { should validate_presence_of :user_type }
 
-    it { should validate_uniqueness_of :email }
+    it { should validate_uniqueness_of(:email).case_insensitive }
 
     it { should allow_value('John').for(:first_name) }
     it { should allow_value('Smith').for(:last_name) }
@@ -52,6 +52,6 @@ RSpec.describe User, type: :model do
 
   describe 'associations' do
     it { should have_many :feedbacks }
-    it { should have_one :user_type }
+    it { should have_one(:user_type).with_foreign_key(:user_type_id) }
   end
 end

@@ -14,6 +14,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'simple_form'
 gem 'administrate', '~> 0.1.1'
+gem 'validates_email_format_of'
 
 group :development, :test do
   gem 'better_errors'
