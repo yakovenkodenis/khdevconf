@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116073222) do
+ActiveRecord::Schema.define(version: 20151116074235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,10 @@ ActiveRecord::Schema.define(version: 20151116073222) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "contact_id"
   end
+
+  add_index "contact_types", ["contact_id"], name: "index_contact_types_on_contact_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.string   "contact"
@@ -141,6 +144,7 @@ ActiveRecord::Schema.define(version: 20151116073222) do
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
   add_index "users", ["user_type_id"], name: "index_users_on_user_type_id", using: :btree
 
+  add_foreign_key "contact_types", "contacts"
   add_foreign_key "feedbacks", "users"
   add_foreign_key "organisers_contacts", "contacts"
   add_foreign_key "speeches", "timetables"
