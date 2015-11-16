@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116064049) do
+ActiveRecord::Schema.define(version: 20151116065112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,7 +78,10 @@ ActiveRecord::Schema.define(version: 20151116064049) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
   end
+
+  add_index "sponsorship_plans", ["user_id"], name: "index_sponsorship_plans_on_user_id", using: :btree
 
   create_table "timetables", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -133,6 +136,7 @@ ActiveRecord::Schema.define(version: 20151116064049) do
   add_index "users", ["user_type_id"], name: "index_users_on_user_type_id", using: :btree
 
   add_foreign_key "feedbacks", "users"
+  add_foreign_key "sponsorship_plans", "users"
   add_foreign_key "user_types", "users"
   add_foreign_key "users", "user_types"
 end
