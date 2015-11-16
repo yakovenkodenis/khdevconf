@@ -31,6 +31,7 @@
 #  unlock_token           :string
 #  locked_at              :datetime
 #  speech_id              :integer
+#  conference_id          :integer
 #
 
 require 'rails_helper'

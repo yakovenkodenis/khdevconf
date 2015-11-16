@@ -2,9 +2,10 @@
 #
 # Table name: timetables
 #
-#  id         :integer          not null, primary key
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id            :integer          not null, primary key
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  conference_id :integer
 #
 
 require 'rails_helper'
