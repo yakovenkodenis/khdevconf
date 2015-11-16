@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116065112) do
+ActiveRecord::Schema.define(version: 20151116071003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,7 +71,10 @@ ActiveRecord::Schema.define(version: 20151116065112) do
     t.time     "qa_finish"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "timetable_id"
   end
+
+  add_index "speeches", ["timetable_id"], name: "index_speeches_on_timetable_id", using: :btree
 
   create_table "sponsorship_plans", force: :cascade do |t|
     t.string   "name"
@@ -126,17 +129,21 @@ ActiveRecord::Schema.define(version: 20151116065112) do
     t.integer  "failed_attempts",        default: 0,  null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
+    t.integer  "speech_id"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["speech_id"], name: "index_users_on_speech_id", using: :btree
   add_index "users", ["sponsorship_plan_id"], name: "index_users_on_sponsorship_plan_id", using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
   add_index "users", ["user_type_id"], name: "index_users_on_user_type_id", using: :btree
 
   add_foreign_key "feedbacks", "users"
+  add_foreign_key "speeches", "timetables"
   add_foreign_key "sponsorship_plans", "users"
   add_foreign_key "user_types", "users"
+  add_foreign_key "users", "speeches"
   add_foreign_key "users", "user_types"
 end

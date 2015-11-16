@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
          :lockable
 
   has_many :feedbacks
+  has_many :speeches
   has_one :sponsorship_plan
   has_one :user_type, foreign_key: 'user_type_id'
 
