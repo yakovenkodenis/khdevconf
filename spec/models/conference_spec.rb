@@ -25,9 +25,9 @@ RSpec.describe Conference, type: :model do
   end
 
   describe 'associations' do
-    it { should have_many :speakers }
-    it { should have_many :attendees }
-    it { should have_many :sponsors }
+    it { should have_many(:speakers).with_foreign_key(:speaker_id) }
+    it { should have_many(:attendees).with_foreign_key(:attendee_id) }
+    it { should have_many(:sponsors).with_foreign_key(:sponsor_id) }
 
     it { should have_one :timetable }
   end

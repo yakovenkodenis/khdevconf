@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116074235) do
+ActiveRecord::Schema.define(version: 20151116075531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,9 +91,12 @@ ActiveRecord::Schema.define(version: 20151116074235) do
   add_index "sponsorship_plans", ["user_id"], name: "index_sponsorship_plans_on_user_id", using: :btree
 
   create_table "timetables", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "conference_id"
   end
+
+  add_index "timetables", ["conference_id"], name: "index_timetables_on_conference_id", using: :btree
 
   create_table "user_types", force: :cascade do |t|
     t.string   "type"
@@ -134,8 +137,10 @@ ActiveRecord::Schema.define(version: 20151116074235) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.integer  "speech_id"
+    t.integer  "conference_id"
   end
 
+  add_index "users", ["conference_id"], name: "index_users_on_conference_id", using: :btree
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -149,7 +154,9 @@ ActiveRecord::Schema.define(version: 20151116074235) do
   add_foreign_key "organisers_contacts", "contacts"
   add_foreign_key "speeches", "timetables"
   add_foreign_key "sponsorship_plans", "users"
+  add_foreign_key "timetables", "conferences"
   add_foreign_key "user_types", "users"
+  add_foreign_key "users", "conferences"
   add_foreign_key "users", "speeches"
   add_foreign_key "users", "user_types"
 end

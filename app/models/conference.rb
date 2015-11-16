@@ -22,4 +22,6 @@ class Conference < ActiveRecord::Base
   has_many :sponsors, class_name: 'User',
                       foreign_key: 'sponsor_id', dependent: :destroy
   has_one :timetable
+
+  validates :name, :description, :date, :place, presence: true
 end
