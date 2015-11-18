@@ -1,0 +1,2 @@
+class Speaker < User
+end

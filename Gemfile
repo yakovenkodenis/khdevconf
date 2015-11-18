@@ -12,9 +12,13 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
+gem 'devise_invitable', '~> 1.3.4'
 gem 'simple_form'
-gem 'administrate', '~> 0.1.1'
 gem 'validates_email_format_of'
+gem 'sprockets-rails', '>= 2.1.4'
+gem 'gravatarify', '~> 3.0.0'
+gem 'auto_html'
+gem 'paperclip', '~> 4.3'
 
 group :development, :test do
   gem 'better_errors'
@@ -39,4 +43,6 @@ end
 
 group :development do
   gem 'annotate'
+  gem 'rateaux'
+  gem 'table_print'
 end
