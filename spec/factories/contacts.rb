@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :contact do
     contact "MyString"
-contact_typs nil
+organisers_contact nil
   end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151119063540) do
+ActiveRecord::Schema.define(version: 20151119064657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,27 +26,27 @@ ActiveRecord::Schema.define(version: 20151119063540) do
 
   create_table "contact_types", force: :cascade do |t|
     t.string   "name"
+    t.integer  "contact_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "contact_types", ["contact_id"], name: "index_contact_types_on_contact_id", using: :btree
+
   create_table "contacts", force: :cascade do |t|
     t.string   "contact"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "contact_type_id"
+    t.integer  "organisers_contact_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
-  add_index "contacts", ["contact_type_id"], name: "index_contacts_on_contact_type_id", using: :btree
+  add_index "contacts", ["organisers_contact_id"], name: "index_contacts_on_organisers_contact_id", using: :btree
 
   create_table "organisers_contacts", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "contact_id"
   end
-
-  add_index "organisers_contacts", ["contact_id"], name: "index_organisers_contacts_on_contact_id", using: :btree
 
   create_table "partners", force: :cascade do |t|
     t.string   "company_name"
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 20151119063540) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "contacts", "contact_types"
-  add_foreign_key "organisers_contacts", "contacts"
+  add_foreign_key "contact_types", "contacts"
+  add_foreign_key "contacts", "organisers_contacts"
   add_foreign_key "partnership_perks", "partnership_plans"
 end

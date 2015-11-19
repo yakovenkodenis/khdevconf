@@ -5,7 +5,5 @@ class CreateOrganisersContacts < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-
-    add_reference :organisers_contacts, :contact, index: true, foreign_key: true
   end
 end
