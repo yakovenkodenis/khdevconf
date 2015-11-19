@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151119064657) do
+ActiveRecord::Schema.define(version: 20151119065304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,15 @@ ActiveRecord::Schema.define(version: 20151119064657) do
   end
 
   add_index "contacts", ["organisers_contact_id"], name: "index_contacts_on_organisers_contact_id", using: :btree
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.text     "feedback"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "feedbacks", ["user_id"], name: "index_feedbacks_on_user_id", using: :btree
 
   create_table "organisers_contacts", force: :cascade do |t|
     t.string   "name"
@@ -109,5 +118,6 @@ ActiveRecord::Schema.define(version: 20151119064657) do
 
   add_foreign_key "contact_types", "contacts"
   add_foreign_key "contacts", "organisers_contacts"
+  add_foreign_key "feedbacks", "users"
   add_foreign_key "partnership_perks", "partnership_plans"
 end
