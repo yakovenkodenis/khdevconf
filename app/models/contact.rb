@@ -1,3 +1,4 @@
 class Contact < ActiveRecord::Base
-  belongs_to :contact_typs
+  has_one :contact_type
+  belongs_to :organisers_contact
 end

@@ -24,6 +24,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rails-erd'
+  gem 'railroady'
   gem 'guard'
   gem 'guard-livereload'
   gem 'guard-rspec'
