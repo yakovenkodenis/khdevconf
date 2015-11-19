@@ -11,23 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151119071227) do
+ActiveRecord::Schema.define(version: 20151119101808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "attendees", force: :cascade do |t|
-    t.string   "username"
-    t.string   "company_name"
-    t.boolean  "subscription"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  create_table "attendees_conferences", id: false, force: :cascade do |t|
-    t.integer "conference_id", null: false
-    t.integer "attendee_id",   null: false
-  end
 
   create_table "conferences", force: :cascade do |t|
     t.string   "name"
@@ -38,14 +25,9 @@ ActiveRecord::Schema.define(version: 20151119071227) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "conferences_partners", id: false, force: :cascade do |t|
+  create_table "conferences_users", id: false, force: :cascade do |t|
+    t.integer "user_id",       null: false
     t.integer "conference_id", null: false
-    t.integer "partner_id",    null: false
-  end
-
-  create_table "conferences_speakers", id: false, force: :cascade do |t|
-    t.integer "conference_id", null: false
-    t.integer "speaker_id",    null: false
   end
 
   create_table "contact_types", force: :cascade do |t|
@@ -81,15 +63,6 @@ ActiveRecord::Schema.define(version: 20151119071227) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "partners", force: :cascade do |t|
-    t.string   "company_name"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.integer  "partnership_plan_id"
-  end
-
-  add_index "partners", ["partnership_plan_id"], name: "index_partners_on_partnership_plan_id", using: :btree
-
   create_table "partnership_perks", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -107,18 +80,14 @@ ActiveRecord::Schema.define(version: 20151119071227) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "speakers", force: :cascade do |t|
-    t.string   "username"
-    t.string   "company_name"
-    t.text     "about"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "username"
     t.string   "type"
+    t.string   "company_name"
+    t.boolean  "subscription"
+    t.text     "about"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "email",                  default: "", null: false
@@ -138,14 +107,16 @@ ActiveRecord::Schema.define(version: 20151119071227) do
     t.integer  "failed_attempts",        default: 0,  null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
+    t.integer  "partnership_plan_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["partnership_plan_id"], name: "index_users_on_partnership_plan_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "contact_types", "contacts"
   add_foreign_key "contacts", "organisers_contacts"
   add_foreign_key "feedbacks", "users"
-  add_foreign_key "partners", "partnership_plans"
   add_foreign_key "partnership_perks", "partnership_plans"
+  add_foreign_key "users", "partnership_plans"
 end

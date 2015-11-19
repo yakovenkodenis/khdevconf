@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable
   has_many :feedbacks
+  # has_and_belongs_to_many :conferences
 end
