@@ -46,4 +46,5 @@ group :development do
   gem 'annotate'
   gem 'rateaux'
   gem 'table_print'
+  gem 'awesome_print'
 end
