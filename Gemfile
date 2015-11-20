@@ -20,6 +20,8 @@ gem 'gravatarify', '~> 3.0.0'
 gem 'auto_html'
 gem 'paperclip', '~> 4.3'
 
+gem 'lol_dba'
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
